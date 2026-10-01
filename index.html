@@ -1,0 +1,686 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tranquilino — Cédulas, Moedas e Antiguidade</title>
+
+  <meta name="description" content="Tranquilino — Compra e venda de moedas, cédulas e antiguidades em São Paulo.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080808;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* ---------- CABEÇALHO ---------- */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(5, 5, 5, 0.94);
+      border-bottom: 1px solid rgba(212, 167, 44, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      max-width: 1150px;
+      margin: auto;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .logo span {
+      color: #d4a72c;
+    }
+
+    nav a {
+      color: #dddddd;
+      margin-left: 25px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #d4a72c;
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 25px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      background:
+        radial-gradient(circle at center, #242016 0%, #0b0b0b 42%, #050505 100%);
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .coin-symbol {
+      width: 115px;
+      height: 115px;
+      margin: 0 auto 30px;
+
+      border: 3px solid #d4a72c;
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #d4a72c;
+      font-size: 70px;
+      font-weight: bold;
+
+      box-shadow:
+        0 0 30px rgba(212, 167, 44, 0.15),
+        inset 0 0 20px rgba(212, 167, 44, 0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 8vw, 82px);
+      letter-spacing: 8px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #d4a72c;
+      font-size: clamp(15px, 2vw, 20px);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .gold-line {
+      width: 80px;
+      height: 3px;
+      background: #d4a72c;
+      margin: 30px auto;
+    }
+
+    .hero h2 {
+      font-size: clamp(25px, 4vw, 40px);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #bbbbbb;
+      font-size: 18px;
+    }
+
+    .buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 27px;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .button-gold {
+      background: #d4a72c;
+      color: #080808;
+    }
+
+    .button-gold:hover {
+      background: #f0c84f;
+      transform: translateY(-2px);
+    }
+
+    .button-outline {
+      border: 1px solid #d4a72c;
+      color: #d4a72c;
+    }
+
+    .button-outline:hover {
+      background: #d4a72c;
+      color: #080808;
+    }
+
+    /* ---------- SEÇÕES ---------- */
+
+    section {
+      padding: 90px 25px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title small {
+      color: #d4a72c;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      margin-top: 10px;
+    }
+
+    .section-title p {
+      color: #999;
+      max-width: 650px;
+      margin: 15px auto 0;
+    }
+
+    /* ---------- SOBRE ---------- */
+
+    .about {
+      background: #111111;
+    }
+
+    .about-text {
+      max-width: 760px;
+      margin: auto;
+      text-align: center;
+      color: #c2c2c2;
+      font-size: 18px;
+    }
+
+    /* ---------- SERVIÇOS ---------- */
+
+    .services {
+      background: #080808;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 10px;
+      padding: 35px 25px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #d4a72c;
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #999;
+    }
+
+    /* ---------- GALERIA ---------- */
+
+    .gallery {
+      background: #111111;
+    }
+
+    .gallery-placeholder {
+      max-width: 900px;
+      margin: auto;
+
+      min-height: 280px;
+
+      border: 1px dashed #555;
+      border-radius: 12px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      background: #090909;
+    }
+
+    .gallery-placeholder .big-icon {
+      font-size: 65px;
+      margin-bottom: 15px;
+    }
+
+    .gallery-placeholder p {
+      color: #888;
+    }
+
+    /* ---------- ENDEREÇO ---------- */
+
+    .location {
+      background: #080808;
+      text-align: center;
+    }
+
+    .address {
+      color: #cccccc;
+      font-size: 19px;
+      line-height: 1.9;
+    }
+
+    /* ---------- CONTATO ---------- */
+
+    .contact {
+      background: #d4a72c;
+      color: #080808;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 38px;
+    }
+
+    .phone {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .contact-button {
+      display: inline-block;
+      background: #080808;
+      color: white;
+      padding: 16px 30px;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .contact-button:hover {
+      background: #222;
+      transform: translateY(-2px);
+    }
+
+    /* ---------- RODAPÉ ---------- */
+
+    footer {
+      background: #040404;
+      text-align: center;
+      padding: 30px 20px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: #d4a72c;
+    }
+
+    /* ---------- CELULAR ---------- */
+
+    @media (max-width: 800px) {
+
+      nav {
+        display: none;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      section {
+        padding: 70px 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: 4px;
+      }
+
+      .subtitle {
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CABEÇALHO -->
+
+  <header>
+    <div class="nav">
+
+      <div class="logo">
+        TRANQUILINO<span>.</span>
+      </div>
+
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#galeria">Moedas</a>
+        <a href="#localizacao">Localização</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- PRINCIPAL -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="coin-symbol">
+          $
+        </div>
+
+        <h1>TRANQUILINO</h1>
+
+        <div class="subtitle">
+          Cédulas, Moedas e Antiguidade
+        </div>
+
+        <div class="gold-line"></div>
+
+        <h2>Compra e venda de moedas</h2>
+
+        <p>
+          Moedas, cédulas e peças de interesse para
+          colecionadores em São Paulo.
+        </p>
+
+        <div class="buttons">
+
+          <a
+            class="button button-gold"
+            href="https://wa.me/5511982324206"
+            target="_blank"
+          >
+            Falar pelo WhatsApp
+          </a>
+
+          <a
+            class="button button-outline"
+            href="#localizacao"
+          >
+            Ver localização
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOBRE -->
+
+    <section class="about" id="sobre">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <small>Tranquilino</small>
+
+          <h2>História em cada peça</h2>
+
+        </div>
+
+        <p class="about-text">
+          A Tranquilino trabalha com compra e venda de
+          moedas, cédulas e antiguidades, oferecendo um
+          espaço para colecionadores e pessoas interessadas
+          em peças que carregam história e valor de coleção.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVIÇOS -->
+
+    <section class="services" id="servicos">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <small>O que fazemos</small>
+
+          <h2>Compra e venda</h2>
+
+          <p>
+            Peças para colecionadores e apaixonados por história.
+          </p>
+
+        </div>
+
+
+        <div class="cards">
+
+          <div class="card">
+
+            <div class="icon">🪙</div>
+
+            <h3>Moedas</h3>
+
+            <p>
+              Compra e venda de moedas para colecionadores
+              e interessados.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="icon">💵</div>
+
+            <h3>Cédulas</h3>
+
+            <p>
+              Cédulas e peças de interesse para coleções.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="icon">🏺</div>
+
+            <h3>Antiguidades</h3>
+
+            <p>
+              Peças e objetos de interesse histórico
+              e colecionável.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GALERIA -->
+
+    <section class="gallery" id="galeria">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <small>Em breve</small>
+
+          <h2>Nossas peças</h2>
+
+          <p>
+            Em breve, você poderá conhecer algumas
+            das moedas e peças disponíveis.
+          </p>
+
+        </div>
+
+
+        <div class="gallery-placeholder">
+
+          <div class="big-icon">🪙</div>
+
+          <p>
+            Galeria de moedas — em breve
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LOCALIZAÇÃO -->
+
+    <section class="location" id="localizacao">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <small>Onde estamos</small>
+
+          <h2>Visite a Tranquilino</h2>
+
+        </div>
+
+
+        <div class="address">
+
+          Rua 24 de Maio, 247<br>
+          7º andar<br>
+          República — São Paulo/SP<br>
+          CEP 01041-001
+
+        </div>
+
+
+        <div class="buttons">
+
+          <a
+            class="button button-outline"
+            href="https://www.google.com/maps/search/?api=1&query=Rua+24+de+Maio+247+Sao+Paulo+SP"
+            target="_blank"
+          >
+            Abrir no Google Maps
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTATO -->
+
+    <section class="contact" id="contato">
+
+      <div class="container">
+
+        <h2>Entre em contato</h2>
+
+        <p>
+          Fale com a Tranquilino pelo WhatsApp.
+        </p>
+
+        <div class="phone">
+          (11) 98232-4206
+        </div>
+
+        <a
+          class="contact-button"
+          href="https://wa.me/5511982324206"
+          target="_blank"
+        >
+          Chamar no WhatsApp
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- RODAPÉ -->
+
+  <footer>
+
+    <strong>TRANQUILINO</strong><br>
+
+    Cédulas, Moedas e Antiguidade<br><br>
+
+    © 2026 Tranquilino — Todos os direitos reservados.
+
+  </footer>
+
+</body>
+</html>
+```
